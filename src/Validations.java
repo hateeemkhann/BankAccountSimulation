@@ -86,16 +86,7 @@ public class Validations {
         if (!email.matches(allowedChars)) {
             return false;
         } else {
-            BufferedReader br = new BufferedReader(new FileReader("src/Account_Holders.txt"));
-            String newline;
-            while ((newline = br.readLine()) != null) {
-                String[] details = newline.split(",");
-                if (details[12].equals(email) && !details[7].equals(accNum)) {
-                    return false;
-                }
-            }
-            br.close();
-            return true;
+            return ValidationDAO.isValidEmail(email);
         }
     }
     public static boolean checkPassword(String password,boolean isAdmin) { // checking password at the time of creating
